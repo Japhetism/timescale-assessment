@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const StyledModal = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -13,10 +13,17 @@ const StyledModal = styled.div`
   opacity: 0;
   transition: opacity linear 0.15s;
   z-index: 2000;
+  height: 474px;
+  background: #FFFFFF;
+  @media (max-width: 550px) {
+    width: 350px;
+}
   width: ${props => {
     switch (props.modalSize) {
       case "lg":
         return "800";
+      case "md":
+        return "583";
       default:
         return "480";
     }
@@ -56,7 +63,6 @@ const StyledModal = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #c7c7c7;
       .box-title {
         font-size: 24px;
         font-weight: 400;
@@ -88,16 +94,44 @@ const StyledModal = styled.div`
       justify-content: flex-end;
       border-top: 1px solid #c7c7c7;
     }
+    .row {
+      display: flex;
+    }
+    .column {
+      flex: 50%;
+      padding: 10px;
+      height: 400px;
+    }
+    .image {
+      width: 266px;
+      height: 389px;
+      left: 458px;
+      top: 389px;
+    }
+    .overview {
+      position: static;
+      width: 341px;
+      left: 0px;
+      top: 36px;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 17px;
+      letter-spacing: -0.01em;
+      color: #000000;
+
+    }
+    .hide-mobile {
+      @media (max-width: 550px) {
+        display: none;
+    }
+    }
   }
 `;
 
 const Modal = (props) => {
     const [fadeType, setFadeType] = useState(null);
-
-    // useEffect(() => {
-    //     window.addEventListener("keydown", onEscKeyDown, false);
-    //     setTimeout(() => setFadeType("in"), 0);
-    // }, []);
 
     useEffect(() => {
         if (!props.isOpen) {
@@ -142,16 +176,23 @@ const Modal = (props) => {
         >
             <div className="box-dialog">
                 <div className="box-header">
-                    <h4 className="box-title">Pure React Modal</h4>
+                    <h4 className="box-title">{props.data.title}</h4>
                     <button onClick={handleClick} className="close">
                     ×
                     </button>
                 </div>
-                <div className="box-content">jdhhdhdhdh</div>
-                <div className="box-footer">
-                    <button onClick={handleClick} className="close">
-                        Close
-                    </button>
+                <div className="box-content">
+                  <div className="row">
+                    <div className="column hide-mobile">
+                        <img className="image" src={`${process.env.REACT_APP_API_BASE_IMAGE_URL}${props.data.poster_path}`} />
+                    </div>
+                    <div className="column">
+                      <h3>Release Date: {props.data.release_date}</h3><span></span>
+                      <p className="overview">{props.data.overview}</p>
+                      <span><strong>{props.data.vote_average}</strong> / 10</span>&nbsp;
+                      <span>{`(${props.data.vote_count} total votes)`}</span>
+                    </div>
+                  </div>
                 </div>
             </div>
             <div

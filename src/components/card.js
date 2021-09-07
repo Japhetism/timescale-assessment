@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import logo from '../images/logo.svg'
 
 const CardWrapper = styled.div`
     width: 282px;
-    height: 348px;
+    height: 368px;
     left: 0px;
     top: 0px;
     background: #FFFFFF;
@@ -23,6 +22,7 @@ const CardImage = styled.div`
     background: url(MV5BOWI5YTUxOWEtZmRiZS00ZmQxLWE2NzctYTRiODA2NzE1ZjczXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg), #FFFFFF;
     border-radius: 7px 7px 0px 0px;
     background: url(${props => props.background}) no-repeat top center;
+    background-size: cover;
 `;
 
 const CardText = styled.div`
@@ -35,12 +35,21 @@ const CardText = styled.div`
     text-align: center;
     letter-spacing: -0.01em;
     color: #000000;
+    width: 280px;
+    height: 66px;
+    display: flex;
+    width: 90%;
+    margin: auto;
+    justify-content:center;
 `;
 
 const Card = (props) => {
-    return <CardWrapper onClick={()=> props.onClick()}>
-        <CardImage background={logo} />
-        <CardText>The Unholy</CardText>
+    
+    const { movie, onClick } = props;
+
+    return <CardWrapper onClick={()=> onClick(movie)}>
+        <CardImage background={`${process.env.REACT_APP_API_BASE_IMAGE_URL}${movie.poster_path}`} />
+        <CardText>{movie.title}</CardText>
     </CardWrapper>
 }
 
