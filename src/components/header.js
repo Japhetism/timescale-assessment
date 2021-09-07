@@ -33,7 +33,6 @@ const Input = styled.input`
   font-weight: 300;
   text-align: center;
   background: #fafafa;
- 
   &:active,
   &:focus {
     text-align: left;
@@ -43,7 +42,6 @@ const Input = styled.input`
 const NavRight = styled.div`
   width: 33.333%;
   text-align: right;
- 
   svg {
     margin-right: 20px;
   }

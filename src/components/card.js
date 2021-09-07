@@ -12,6 +12,7 @@ const CardWrapper = styled.div`
     box-sizing: border-box;
     box-shadow: 1px 2px 8px 2px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    cursor; pointer;
 `;
 
 const CardImage = styled.div`
@@ -36,11 +37,11 @@ const CardText = styled.div`
     color: #000000;
 `;
 
-const Card = () => (
-    <CardWrapper>
+const Card = (props) => {
+    return <CardWrapper onClick={()=> props.onClick()}>
         <CardImage background={logo} />
         <CardText>The Unholy</CardText>
     </CardWrapper>
-)
+}
 
 export default Card;
