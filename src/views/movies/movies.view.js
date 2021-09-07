@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Card from '../../components/card';
 import DefaultLayout from '../../components/default.layout';
 import Header from '../../components/header';
@@ -18,10 +18,13 @@ const MoviesView = (props) => {
         />}
         <Typography />
         <CardContainer>
-            {props.movieList.map(movie => (<Card onClick={props.handleCardClick} movie={movie} key={Math.random()} />))}
-            {/* <Card onClick={props.handleCardClick}/>
-            <Card onClick={props.handleCardClick}/>
-            <Card onClick={props.handleCardClick}/> */}
+            {props.movieList.map(movie => (
+                <Card 
+                    onClick={props.handleCardClick} 
+                    movie={movie} 
+                    key={Math.random()} 
+                />
+            ))}
         </CardContainer>
     </DefaultLayout>
 }

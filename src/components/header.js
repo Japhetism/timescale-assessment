@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import logo from "../images/logo.svg";
 
 const Nav = styled.div`
   background-color: #fff;
@@ -13,6 +14,8 @@ const NavHeader = styled.div`
   align-items: center;
   margin: 0 auto;
   border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
+  background: url(${logo}) no-repeat;
+  background-size: 200px 100px;
 `;
  
 const NavLeft = styled.div`
@@ -50,16 +53,16 @@ const NavRight = styled.div`
 const MenuLink = styled.a``;
 
 const Header = () => (
-    <Nav>
-      <NavHeader>
-        <NavLeft>Stylagram</NavLeft>
-        <NavRight>
-          <MenuLink href="#">
-          <Input type="text" placeholder="Search for a movie" />
-          </MenuLink>
-         </NavRight>
-      </NavHeader>
-    </Nav>
+  <Nav>
+    <NavHeader>
+      <NavLeft />
+      <NavRight>
+        <MenuLink href="#">
+        <Input type="text" placeholder="Search for a movie" />
+        </MenuLink>
+        </NavRight>
+    </NavHeader>
+  </Nav>
 )
 
 export default Header;
