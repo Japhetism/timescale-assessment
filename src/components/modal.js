@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import closeIcon from '../images/close-icon.svg';
 
 const StyledModal = styled.div`
   position: fixed;
@@ -177,9 +178,7 @@ const Modal = (props) => {
       <div className="box-dialog">
         <div className="box-header">
           <h4 className="box-title">{props.data.title}</h4>
-          <button onClick={handleClick} className="close">
-            ×
-          </button>
+          <img src={closeIcon} onClick={handleClick} alt="Close" />
         </div>
         <div className="box-content">
           <div className="row">
