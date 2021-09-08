@@ -6,6 +6,7 @@ import CardContainer from '../../components/card.container';
 import Typography from '../../components/Typography';
 import StyledModal from '../../components/modal';
 import Spinner from '../../components/spinner';
+import Alert from '../../components/Alert';
 
 const MoviesView = (props) => {
     return <DefaultLayout>
@@ -19,6 +20,7 @@ const MoviesView = (props) => {
         />}
         <Typography title="Most Recent Movies" />
         <CardContainer>
+            {props.errorMessage && <Alert message={props.errorMessage} />}
             {props.isLoading && <Spinner />}
             {!props.isLoading && props.movieList.map(movie => (
                 <Card 

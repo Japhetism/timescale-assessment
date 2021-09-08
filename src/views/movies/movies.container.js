@@ -3,10 +3,12 @@ import MoviesView from './movies.view';
 import MovieService from '../../services/movies';
 
 export const MoviesContainer = () => {
+    const defaultErrorMessage = "An error occurred, please try again."
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState([]);
     const [movieList, setMovieList] = useState([]);
+    const [errorMessage, setErrorMessage] = useState(null);
     const toggleState = e => {
         setIsModalOpen(!isModalOpen)
     }
@@ -22,9 +24,13 @@ export const MoviesContainer = () => {
     const getRecentMovies = async () => {
         setIsLoading(true);
         const responseObj = await MovieService.getRecentMovies();
-        const { results } = responseObj
+        const { results, status_message } = responseObj
         if (results) {
             setMovieList(results);
+            setErrorMessage(null);
+        } else {
+            setErrorMessage(status_message ? status_message : defaultErrorMessage);
+            setMovieList([]);
         }
         setIsLoading(false)
     }
@@ -37,9 +43,13 @@ export const MoviesContainer = () => {
         } else {
             responseObj = await MovieService.getRecentMovies();
         }
-        const { results } = responseObj
+        const { results, status_message } = responseObj
         if (results) {
             setMovieList(results);
+            setErrorMessage(null);
+        } else {
+            setErrorMessage(status_message ? status_message : defaultErrorMessage);
+            setMovieList([]);
         }
         setIsLoading(false);
     }
@@ -53,5 +63,6 @@ export const MoviesContainer = () => {
         modalContent={modalContent}
         searchMovies={searchMovies}
         isLoading={isLoading}
+        errorMessage={errorMessage}
     />
 }

@@ -4,6 +4,7 @@ const Communication = {
     getMethod(endpoint) {
         return axios.get(endpoint)
             .then((response) => response.data)
+            .catch((error) => error.response.data)
     }
 };
 

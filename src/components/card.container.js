@@ -6,7 +6,7 @@ const Container = styled.div`
     padding: 0.25rem;
     align-items: center;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 14px;
     margin-bottom: 40px;
     flex-wrap: wrap;
     @media (max-width: 550px) {
