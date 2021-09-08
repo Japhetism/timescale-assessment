@@ -2,6 +2,79 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import closeIcon from '../images/close-icon.svg';
 
+const Modal = (props) => {
+  const [fadeType, setFadeType] = useState(null);
+
+  useEffect(() => {
+    if (!props.isOpen) {
+      setFadeType("out");
+    } else {
+      window.addEventListener("keydown", onEscKeyDown, false);
+      setTimeout(() => setFadeType("in"), 0);
+    }
+  }, [props.isOpen]);
+
+  useEffect(() => {
+    return () => { window.removeEventListener("keydown", onEscKeyDown, false) };
+  });
+
+  const transitionEnd = e => {
+    if (e.propertyName !== "opacity" || fadeType === "in") return;
+
+    if (fadeType === "out") {
+      props.onClose();
+    }
+  };
+    
+  const onEscKeyDown = e => {
+    if (e.key !== "Escape") return;
+    setFadeType("out");
+  };
+    
+  const handleClick = e => {
+    e.preventDefault();
+    setFadeType("out")
+  };
+
+  return <React.Fragment> 
+    <StyledModal
+      id={props.id}
+      className={`wrapper ${"size-" + props.modalSize} fade-${
+      fadeType
+      } ${props.modalClass}`}
+      role="dialog"
+      modalSize={props.modalSize}
+      onTransitionEnd={transitionEnd}
+    >
+      <div className="box-dialog">
+        <div className="box-header">
+          <h4 className="box-title">{props.data.title}</h4>
+          <img src={closeIcon} onClick={handleClick} alt="Close" />
+        </div>
+        <div className="box-content">
+          <div className="row">
+            <div className="column hide-mobile">
+                <img className="image" src={`${process.env.REACT_APP_API_BASE_IMAGE_URL}${props.data.poster_path}`} alt={props.data.title} />
+            </div>
+            <div className="column">
+              <h3>Release Date: {props.data.release_date}</h3><span></span>
+              <p className="overview">{props.data.overview}</p>
+              <span><strong>{props.data.vote_average}</strong> / 10</span>&nbsp;
+              <span>{`(${props.data.vote_count} total votes)`}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className={`background`}
+        onMouseDown={handleClick}
+      />
+    </StyledModal>
+  </React.Fragment>
+}
+
+export default Modal;
+
 const StyledModal = styled.div`
   position: fixed;
   top: 0;
@@ -130,76 +203,3 @@ const StyledModal = styled.div`
     }
   }
 `;
-
-const Modal = (props) => {
-  const [fadeType, setFadeType] = useState(null);
-
-  useEffect(() => {
-    if (!props.isOpen) {
-      setFadeType("out");
-    } else {
-      window.addEventListener("keydown", onEscKeyDown, false);
-      setTimeout(() => setFadeType("in"), 0);
-    }
-  }, [props.isOpen]);
-
-  useEffect(() => {
-    return () => { window.removeEventListener("keydown", onEscKeyDown, false) };
-  });
-
-  const transitionEnd = e => {
-    if (e.propertyName !== "opacity" || fadeType === "in") return;
-
-    if (fadeType === "out") {
-      props.onClose();
-    }
-  };
-    
-  const onEscKeyDown = e => {
-    if (e.key !== "Escape") return;
-    setFadeType("out");
-  };
-    
-  const handleClick = e => {
-    e.preventDefault();
-    setFadeType("out")
-  };
-
-  return <React.Fragment> 
-    <StyledModal
-      id={props.id}
-      className={`wrapper ${"size-" + props.modalSize} fade-${
-      fadeType
-      } ${props.modalClass}`}
-      role="dialog"
-      modalSize={props.modalSize}
-      onTransitionEnd={transitionEnd}
-    >
-      <div className="box-dialog">
-        <div className="box-header">
-          <h4 className="box-title">{props.data.title}</h4>
-          <img src={closeIcon} onClick={handleClick} alt="Close" />
-        </div>
-        <div className="box-content">
-          <div className="row">
-            <div className="column hide-mobile">
-                <img className="image" src={`${process.env.REACT_APP_API_BASE_IMAGE_URL}${props.data.poster_path}`} alt={props.data.title} />
-            </div>
-            <div className="column">
-              <h3>Release Date: {props.data.release_date}</h3><span></span>
-              <p className="overview">{props.data.overview}</p>
-              <span><strong>{props.data.vote_average}</strong> / 10</span>&nbsp;
-              <span>{`(${props.data.vote_count} total votes)`}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className={`background`}
-        onMouseDown={handleClick}
-      />
-    </StyledModal>
-  </React.Fragment>
-}
-
-export default Modal;

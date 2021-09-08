@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+const Typography = (props) => (
+  <Container>
+    <Text>{props.title}</Text>
+  </Container>
+)
+
+export default Typography;
+
 const Container = styled.div`
   max-width: 1240px;
   padding: 15px 20px;
@@ -24,11 +32,3 @@ const Text = styled.span`
   letter-spacing: -0.01em;
   color: #000000;
 `;
-
-const Typography = (props) => (
-  <Container>
-    <Text>{props.title}</Text>
-  </Container>
-)
-
-export default Typography;

@@ -1,6 +1,26 @@
 import styled from 'styled-components';
 import logo from "../images/logo.svg";
 
+const Header = (props) => {
+  
+  const handleSearch = (query) => {
+    props.searchMovies(query);
+  }
+
+  return <Nav>
+    <NavHeader>
+      <NavLeft />
+      <NavRight>
+        <MenuLink href="#">
+        <Input type="text" placeholder="Search for a movie" onChange={event => handleSearch(event.target.value)} />
+        </MenuLink>
+        </NavRight>
+    </NavHeader>
+  </Nav>
+}
+
+export default Header;
+
 const Nav = styled.div`
   background-color: #fff;
 `;
@@ -50,23 +70,3 @@ const NavRight = styled.div`
 `;
  
 const MenuLink = styled.a``;
-
-const Header = (props) => {
-  
-  const handleSearch = (query) => {
-    props.searchMovies(query);
-  }
-
-  return <Nav>
-    <NavHeader>
-      <NavLeft />
-      <NavRight>
-        <MenuLink href="#">
-        <Input type="text" placeholder="Search for a movie" onChange={event => handleSearch(event.target.value)} />
-        </MenuLink>
-        </NavRight>
-    </NavHeader>
-  </Nav>
-}
-
-export default Header;

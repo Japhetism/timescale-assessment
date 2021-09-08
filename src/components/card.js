@@ -1,5 +1,19 @@
 import styled from 'styled-components';
 
+const Card = (props) => {
+    
+    const { movie, onClick } = props;
+
+    return <CardWrapper onClick={()=> onClick(movie)}>
+        <CardImage background={`${process.env.REACT_APP_API_BASE_IMAGE_URL}${movie.poster_path}`}>
+            <Circular>{movie.vote_average}</Circular>
+        </CardImage>
+        <CardText>{movie.title}</CardText>
+    </CardWrapper>
+}
+
+export default Card;
+
 const CardWrapper = styled.div`
     width: 282px;
     height: 368px;
@@ -53,17 +67,3 @@ const Circular = styled.div`
     background: white;
     margin: 10px;
 `;
-
-const Card = (props) => {
-    
-    const { movie, onClick } = props;
-
-    return <CardWrapper onClick={()=> onClick(movie)}>
-        <CardImage background={`${process.env.REACT_APP_API_BASE_IMAGE_URL}${movie.poster_path}`}>
-            <Circular>{movie.vote_average}</Circular>
-        </CardImage>
-        <CardText>{movie.title}</CardText>
-    </CardWrapper>
-}
-
-export default Card;

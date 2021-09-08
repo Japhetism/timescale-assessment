@@ -1,5 +1,16 @@
 import styled from 'styled-components';
 
+const CardContainer = (props) => {
+
+    const { children } = props;
+
+	return <Container>
+        {children}    
+    </Container>
+}
+
+export default CardContainer;
+
 const Container = styled.div`
     display: flex;
     gap: 3.25rem;
@@ -13,14 +24,3 @@ const Container = styled.div`
         flex-direction: column;
     }
 `;
-
-const CardContainer = (props) => {
-
-    const { children } = props;
-
-	return <Container>
-        {children}    
-    </Container>
-}
-
-export default CardContainer;

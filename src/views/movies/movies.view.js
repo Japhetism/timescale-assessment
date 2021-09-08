@@ -1,11 +1,11 @@
 import React from 'react';
-import Card from '../../components/card';
-import DefaultLayout from '../../components/default.layout';
-import Header from '../../components/header';
-import CardContainer from '../../components/card.container';
+import Card from '../../components/Card';
+import DefaultLayout from '../../components/Default.Layout';
+import Header from '../../components/Header';
+import CardContainer from '../../components/Card.Container';
 import Typography from '../../components/Typography';
-import StyledModal from '../../components/modal';
-import Spinner from '../../components/spinner';
+import StyledModal from '../../components/Modal';
+import Spinner from '../../components/Spinner';
 import Alert from '../../components/Alert';
 
 const MoviesView = (props) => {

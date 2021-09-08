@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-const Container = styled.div``;
-
 const DefaultLayout = (props) => {
 
     const { children } = props;
@@ -12,3 +10,5 @@ const DefaultLayout = (props) => {
 }
 
 export default DefaultLayout;
+
+const Container = styled.div``;
