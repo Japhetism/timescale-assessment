@@ -16,7 +16,7 @@ const MoviesView = (props) => {
             modalSize="lg"
             data={props.modalContent}
         />}
-        <Typography />
+        <Typography title="Most Recent Movies" />
         <CardContainer>
             {props.movieList.map(movie => (
                 <Card 

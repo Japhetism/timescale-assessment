@@ -25,9 +25,9 @@ const Text = styled.span`
   color: #000000;
 `;
 
-const Typography = () => (
+const Typography = (props) => (
   <Container>
-    <Text>Most Recent Movies</Text>
+    <Text>{props.title}</Text>
   </Container>
 )
 

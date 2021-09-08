@@ -10,7 +10,6 @@ export const MoviesContainer = () => {
         setIsModalOpen(!isModalOpen)
     }
     const handleCardClick = movie => {
-        console.log("got to handleCardClick", movie)
         setModalContent(movie);
         setIsModalOpen(true)
     }
@@ -21,14 +20,18 @@ export const MoviesContainer = () => {
 
     const getRecentMovies = async () => {
         const responseObj = await MovieService.getRecentMovies();
-        console.log("from get recent movies ", responseObj.results)
-        setMovieList(responseObj.results);
+        const { results } = responseObj
+        if (results) {
+            setMovieList(results);
+        }
     }
 
     const searchMovies = async (query) => {
         const responseObj = await MovieService.searchMovies(query);
-        console.log("from get recent movies ", responseObj.results)
-        setMovieList(responseObj.results);
+        const { results } = responseObj
+        if (results) {
+            setMovieList(results);
+        }
     }
     
     return <MoviesView 

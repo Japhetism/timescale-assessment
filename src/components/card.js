@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 const CardWrapper = styled.div`
@@ -43,12 +42,26 @@ const CardText = styled.div`
     justify-content:center;
 `;
 
+const Circular = styled.div`
+    position: absolute;
+    border: 1px solid;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    padding: 5px;
+    text-align: center;
+    background: white;
+    margin: 10px;
+`;
+
 const Card = (props) => {
     
     const { movie, onClick } = props;
 
     return <CardWrapper onClick={()=> onClick(movie)}>
-        <CardImage background={`${process.env.REACT_APP_API_BASE_IMAGE_URL}${movie.poster_path}`} />
+        <CardImage background={`${process.env.REACT_APP_API_BASE_IMAGE_URL}${movie.poster_path}`}>
+            <Circular>{movie.vote_average}</Circular>
+        </CardImage>
         <CardText>{movie.title}</CardText>
     </CardWrapper>
 }
