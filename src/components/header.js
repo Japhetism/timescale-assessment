@@ -52,17 +52,22 @@ const NavRight = styled.div`
  
 const MenuLink = styled.a``;
 
-const Header = () => (
-  <Nav>
+const Header = (props) => {
+  
+  const handleSearch = (query) => {
+    props.searchMovies(query);
+  }
+
+  return <Nav>
     <NavHeader>
       <NavLeft />
       <NavRight>
         <MenuLink href="#">
-        <Input type="text" placeholder="Search for a movie" />
+        <Input type="text" placeholder="Search for a movie" onChange={event => handleSearch(event.target.value)} />
         </MenuLink>
         </NavRight>
     </NavHeader>
   </Nav>
-)
+}
 
 export default Header;

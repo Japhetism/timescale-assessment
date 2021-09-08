@@ -4,6 +4,7 @@ const config = {
     lang: "en-US",
     endpoints: {
       recentMovies: "/movie/upcoming",
+      searchMovies: "/search/movie"
     },
 };
   

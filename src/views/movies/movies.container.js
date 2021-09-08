@@ -24,6 +24,12 @@ export const MoviesContainer = () => {
         console.log("from get recent movies ", responseObj.results)
         setMovieList(responseObj.results);
     }
+
+    const searchMovies = async (query) => {
+        const responseObj = await MovieService.searchMovies(query);
+        console.log("from get recent movies ", responseObj.results)
+        setMovieList(responseObj.results);
+    }
     
     return <MoviesView 
         isModalOpen={isModalOpen}
@@ -32,5 +38,6 @@ export const MoviesContainer = () => {
         handleCardClick={handleCardClick}
         movieList={movieList}
         modalContent={modalContent}
+        searchMovies={searchMovies}
     />
 }

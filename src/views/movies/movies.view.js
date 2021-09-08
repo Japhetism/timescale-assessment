@@ -8,7 +8,7 @@ import StyledModal from '../../components/modal';
 
 const MoviesView = (props) => {
     return <DefaultLayout>
-        <Header />
+        <Header searchMovies={props.searchMovies} />
         {props.isModalOpen && <StyledModal
             id="modal"
             isOpen={props.isModalOpen}
