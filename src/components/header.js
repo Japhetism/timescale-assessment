@@ -1,9 +1,13 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import logo from "../images/logo.svg";
 
 const Header = (props) => {
   
-  const handleSearch = (query) => {
+  const [query, setQuery] = useState(null);
+
+  const handleSearch = e => {
+    e.preventDefault()
     props.searchMovies(query);
   }
 
@@ -11,8 +15,11 @@ const Header = (props) => {
     <NavHeader>
       <NavLeft />
       <NavRight>
-        <MenuLink href="#">
-        <Input type="text" placeholder="Search for a movie" onChange={event => handleSearch(event.target.value)} />
+        <MenuLink>
+          <Form>
+          <Input type="text" placeholder="Search for a movie" onChange={event => setQuery(event.target.value)} />
+          <Button onClick={handleSearch} type="submit">Submit</Button>
+          </Form>
         </MenuLink>
         </NavRight>
     </NavHeader>
@@ -70,3 +77,9 @@ const NavRight = styled.div`
 `;
  
 const MenuLink = styled.a``;
+
+const Form = styled.form``;
+
+const Button = styled.button`
+  display: none;
+`;

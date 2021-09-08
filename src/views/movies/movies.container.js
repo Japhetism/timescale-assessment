@@ -18,22 +18,14 @@ export const MoviesContainer = () => {
     }
 
     useEffect(() => {
+        const getRecentMovies = async () => {
+            setIsLoading(true);
+            const responseObj = await MovieService.getRecentMovies();
+            handleResponse(responseObj)
+            setIsLoading(false)
+        };
         getRecentMovies();
     }, []);
-
-    const getRecentMovies = async () => {
-        setIsLoading(true);
-        const responseObj = await MovieService.getRecentMovies();
-        const { results, status_message } = responseObj
-        if (results) {
-            setMovieList(results);
-            setErrorMessage(null);
-        } else {
-            setErrorMessage(status_message ? status_message : defaultErrorMessage);
-            setMovieList([]);
-        }
-        setIsLoading(false)
-    }
 
     const searchMovies = async (query) => {
         setIsLoading(true)
@@ -43,16 +35,23 @@ export const MoviesContainer = () => {
         } else {
             responseObj = await MovieService.getRecentMovies();
         }
+        handleResponse(responseObj);
+        setIsLoading(false);
+    }
+
+    const handleResponse = (responseObj) => {
         const { results, status_message } = responseObj
-        if (results) {
+        if (results && results.length > 0) {
             setMovieList(results);
             setErrorMessage(null);
+        } else if (results && results.length === 0) {
+            setMovieList(results);
+            setErrorMessage("No movie found");
         } else {
             setErrorMessage(status_message ? status_message : defaultErrorMessage);
             setMovieList([]);
         }
-        setIsLoading(false);
-    }
+    } 
     
     return <MoviesView 
         isModalOpen={isModalOpen}
