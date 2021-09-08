@@ -5,6 +5,7 @@ import Header from '../../components/header';
 import CardContainer from '../../components/card.container';
 import Typography from '../../components/Typography';
 import StyledModal from '../../components/modal';
+import Spinner from '../../components/spinner';
 
 const MoviesView = (props) => {
     return <DefaultLayout>
@@ -18,7 +19,8 @@ const MoviesView = (props) => {
         />}
         <Typography title="Most Recent Movies" />
         <CardContainer>
-            {props.movieList.map(movie => (
+            {props.isLoading && <Spinner />}
+            {!props.isLoading && props.movieList.map(movie => (
                 <Card 
                     onClick={props.handleCardClick} 
                     movie={movie} 
